@@ -1,0 +1,22 @@
+module ser_word(
+	input [11:0] word,
+	input clk, new_word,
+	output ser_out);
+	
+//  when new_word is high, load in a new word to a 12 bit shift register.
+// output bit 11 (most sig bit). On each clock shift data left
+	
+
+	reg[11:0] shiftreg;   // 12 bit shift register data
+	
+	assign ser_out = shiftreg[11] ;
+	
+	always @(posedge clk)
+		if (new_word) shiftreg <= word ;
+		else shiftreg <= {shiftreg[10:1],1'b0} ;
+	
+endmodule
+	
+
+			
+					
